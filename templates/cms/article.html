@@ -1,0 +1,18 @@
+{% extends "cms/base.html" %}
+
+{% load cms_tags %}
+
+{% block title %}{{ block.super }} | {{ article.section.name }}{% endblock %}
+
+{% block body-text %}
+  <div id="text-area">
+    {{ article|add_images|safe }}
+  </div>
+  
+  <div id="extra-links">
+    <p>Technical Illustration</p>
+    <p>Information Graphics</p>
+    <p>Graphic Design</p>
+  </div>
+</div>
+{% endblock %}

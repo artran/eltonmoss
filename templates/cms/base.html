@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" href="/media/css/ti-visual.css" type="text/css" charset="utf-8"/>
+  <!--[if lte IE 7]>
+    <link rel="stylesheet" href="/media/css/ti-visual_ie7.css" type="text/css" charset="utf-8"/>
+  <![endif]-->
+  <style type="text/css">
+    {% for section in sections %}
+      a#{{ section.slug }} {
+        display: block;
+        height: 36px;
+        background: #54575e url({{ section.get_icon_img_url }}) no-repeat left top;
+      }
+
+      a#{{ section.slug }}:hover { background-position: left bottom; }
+    {% endfor %}
+  </style>
+  {% if article.style %}
+    <style type="text/css">
+      {{ article.style }}
+    </style>
+  {% endif %}
+  <title>{% block title %}Ti-Visual{% endblock %}</title>
+</head>
+
+<body>
+  <div id="banner">
+    <img src="/media/images/header.gif" alt="Ti-Visual Ltd" title="Ti-Visual Ltd" />
+  </div>
+  
+  <div id="menu-bar">
+    <ul>
+      {% for section in sections %}
+        <li><a href="{% url cms.views.section section.slug %}">{{ section }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+  
+  <div id="img-block">
+    <img src="{{ article.section.get_random_image_url }}" alt="Image" />
+  </div>
+
+  <div id="content">
+    <div id="side-menu">
+      <ul>
+        {% for section in sections %}
+          <li><a href="{% url cms.views.section section.slug %}" id="{{ section.slug }}">&nbsp;</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    
+    {% block body-text %}{% endblock %}
+  
+  <div id="right-image">
+    <img src="/media/images/vis_comm.gif" alt="visual communication" />
+  </div>
+  
+  <div id="footer">
+    <img src="/media/images/footer.gif" alt="alt" title="title" />
+  </div>
+</body>
+</html>
