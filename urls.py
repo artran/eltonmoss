@@ -5,7 +5,6 @@ urlpatterns = patterns('',
     # The main site
     (r'^$', 'django.views.generic.simple.redirect_to', {'url': '/articles/'}),
     (r'^articles/', include('cms.urls')),
-    (r'^utils/', include('utils.urls')),
 )
 
 urlpatterns += patterns('',
