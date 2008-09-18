@@ -1,0 +1,16 @@
+
+#footer ul li{ background-image: expression( (this===this.parentNode.childNodes[0]) ? "none" : "auto");}
+
+/*--- IE 6 PNG FILTERS ---*/
+#menu ul{
+	background:url(none.gif) fixed;
+	filter: progid:dximagetransform.microsoft.alphaimageloader(src='images/bg-sub-menu.png', sizingMethod='scale');
+}
+#gallery .nav-hold ul{
+	background:url(none.gif) fixed;
+	filter: progid:dximagetransform.microsoft.alphaimageloader(src='images/bg-gallery-nav.png', sizingMethod='crop');
+}
+#gallery .nav-hold ul li{
+	background:url(none.gif) fixed;
+	filter: progid:dximagetransform.microsoft.alphaimageloader(src='images/bg-gallery-btn.png', sizingMethod='crop');
+}
