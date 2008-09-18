@@ -26,8 +26,7 @@ def article(request, slug):
     
     sections = Section.live_objects.filter(parent__isnull=True)
     live_articles = Article.live_objects.all()
-    features = live_articles.filter(feature=True)
     
     related = article.get_live_related()
-    return render_to_response('cms/article.html', {'sections': sections, 'features': features,
-                              'article': article, 'related': related, 'this_section': live_articles, 'session': request.session})
+    return render_to_response('cms/article.html', {'sections': sections, 'article': article,
+                        'related': related, 'in_this_section': live_articles, 'session': request.session})

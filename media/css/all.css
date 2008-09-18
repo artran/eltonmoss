@@ -312,28 +312,31 @@ a img{ border:none;}
 	color:#771717;
 	background:url(../images/bg-nav-col-capt.gif) repeat-x 0 100%;
 }
-/*---- about-block css ---*/
-.nav-col .about-block{
+/*---- side-menu css ---*/
+.nav-col .side-menu{
 	width:100%;
 	margin-top:20px;
 	min-height:170px;
 }
-* html .nav-col .about-block{
+* html .nav-col .side-menu{
 	overflow:visible;
 	height:170px;
 }
-.nav-col .about-block ul{
+.nav-col .side-menu ul{
 	font:1.3em "Times New Roman", Garamond, serif;
 	margin:3px 25px;
 }
-.nav-col .about-block ul li{
+.nav-col .side-menu ul li{
+	padding:8px 0 7px 9px;
+}
+.nav-col .side-menu ul li.subsection-link{
 	padding:8px 0 7px;
 }
-.nav-col .about-block ul a{
+.nav-col .side-menu ul a{
 	color:#231f20;
 	text-decoration:none;
 }
-.nav-col .about-block ul a:hover{ color:#771717;}
+.nav-col .side-menu ul a:hover{ color:#771717;}
 /*--- ---*/
 .nav-col .contact-block{
 	width:100%;

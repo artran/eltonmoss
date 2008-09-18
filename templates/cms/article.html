@@ -15,7 +15,7 @@
           <div>
     				<ul>
     				  {% for sub in section.subsections.all %}
-    				    <li><a href='{% url cms.views.section section.slug %}'>{{ sub.name|title }}</a></li>
+    				    <li><a href='{% url cms.views.section sub.slug %}'>{{ sub.name|title }}</a></li>
     				  {% endfor %}
     				</ul>
     			</div>
@@ -25,15 +25,57 @@
 	</ul>
 {% endblock %}
 
+{% block side-menu %}
+  {% with article.section as section %}
+    <div class="side-menu">
+      <h4>{{ section.name|title }}</h4>
+      <ul>
+        {% for sub in section.subsections.all %}
+          <li class='subsection-link'><a href='{% url cms.views.section sub.slug %}'>&bull; {{ sub.name|title }}</a></li>
+        {% endfor %}
+        {% for art in section.articles.all %}
+          <li>
+            {% ifequal art article %}
+              <span style="font-style: italic">
+            {% else %}
+              <a href='{% url cms.views.article art.slug %}'>
+            {% endifequal %}
+            {{ art.title|title }}
+            {% ifequal art article %}
+              </span>
+            {% else %}
+              </a>
+            {% endifequal %}
+          </li>
+        {% endfor %}
+      </ul>
+  	</div>
+  {% endwith %}		
+{% endblock %}
+
+{% block gallery %}
+  {% with article.section as section %}
+    <div id="gallery">
+  		<div class="hold">
+  			<img src="/media/{{ section.block_img }}" width="800" height="279" alt="" />
+  			{% for img in section.images.all %}
+			    <img src="/media/{{ img.image }}" width="800" height="279" alt="" />
+  			{% endfor %}
+  		</div>
+  		<div class="nav-hold">
+  			<ul>
+  				<li class="active"><a href="#"><img src="/media/{{ section.thumbnail_img }}" width="85" height="85" alt="" /></a></li>
+  				{% for img in section.images.all %}
+  			    <li class="active"><a href="#"><img src="/media/{{ img.thumbnail_img }}" width="85" height="85" alt="" /></a></li>
+    			{% endfor %}
+  			</ul>
+  		</div>
+  	</div>
+  {% endwith %}
+{% endblock %}
+
 {% block body-text %}
-  <div id="text-area">
+  <div class="text-block">
     {{ article|add_images|safe }}
   </div>
-  
-  <div id="extra-links">
-    <p>Technical Illustration</p>
-    <p>Information Graphics</p>
-    <p>Graphic Design</p>
-  </div>
-</div>
 {% endblock %}

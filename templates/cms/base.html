@@ -15,56 +15,27 @@
 		<!-- BEGIN CONTENT BLOCK -->
 		<div id="content">
 			<!-- begin gallery block -->
-			<div id="gallery">
-				<div class="hold">
-					<img src="/media/images/gallery-img1.jpg" width="800" height="279" alt="" />
-					<img src="/media/images/gallery-img2.jpg" width="800" height="279" alt="" />
-					<img src="/media/images/gallery-img4.jpg" width="800" height="279" alt="" />
-					<img src="/media/images/gallery-img3.jpg" width="800" height="279" alt="" />
-				</div>
-				<div class="nav-hold">
-					<ul>
-						<li class="active"><a href="#"><img src="/media/images/gallery-nav-img3.png" width="85" height="85" alt="" /></a></li>
-						<li><a href="#"><img src="/media/images/gallery-nav-img4.png" width="85" height="85" alt="" /></a></li>
-						<li><a href="#"><img src="/media/images/gallery-nav-img2.png" width="85" height="85" alt="" /></a></li>
-						<li><a href="#"><img src="/media/images/gallery-nav-img1.png" width="85" height="85" alt="" /></a></li>
-					</ul>
-				</div>
-			</div>
+			{% block gallery %}
+			 
+			{% endblock %}
 			<!-- end gallery block -->
 			<div class="content-text">
 				<h1 class="logo"><a href="#">ELTON MOSS - BOATBUILDERS</a></h1>
 				<!-- begin content text block -->
-				<div class="text-block">
-					<h2>A Professional, friendly service <span>from a quality Canal Boat builder.</span></h2>
-					<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam in diam ac metus euismod malesuada. Sed sem sem, ultrices non, lacinia quis, laoreet vitae, eros. Vivamus luctus. Sed fringilla dictum mi. Ut ut dolor. Pellentesque at augue. Nunc id lacus at ante vulputate dapibus. Sed nec purus. Maecenas risus orci, faucibus eu, fermentum non, fermentum id, orci. Sed ornare imperdiet est. Integer sit amet metus.</p>
-					<div class="cite-box">
-						<div class="hold">
-							<p>Curabitur pulvinar, est sed iaculis fermentum, elit justo facilisis dolor, in bibendum mauris velit et mi. Fusce turpis turpis, consequat ut, cursus a, pretium ut, ligula. In sem tortor, sagittis non, sodales id, suscipit posuere, nunc. Praesent velit odio, vehicula sed, suscipit nec, cursus ut, neque.</p>
-							<span class="autor">Joe Bloggs, June 2007</span>
-						</div>
-					</div>
-					<img src="/media/images/img1.jpg" width="245" height="163" alt="" class="right"/>
-					<p>Curabitur metus. Duis condimentum mauris nec risus. Etiam porttitor. Donec semper facilisis purus. Vivamus nunc orci, condimentum at, sollicitudin sit amet, lacus. Donec sed diam sed magna suscipit lobortis. Suspendisse adipiscing. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras ante turpis, sit amet, vulputate dictum, tempus vel, tellus. Nullam tristique convallis quam. Nullam nec tortor. Curabitur sagittis bibendum pede. ut porttitor, massa ac ullamcorper elementum.</p>
-					<p>Vivamus ornare, orci vel bibendum porttitor, felis nibh malesuada sapien, quis interdum nisi tellus sed</p>
-				</div>
+				{% block body-text %}
+				  
+				{% endblock %}
 				<!-- end content text block -->
 				<div class="nav-col">
-					<!-- begin about block -->
-					<div class="about-block">
-						<h4>About Us</h4>
-						<ul>
-							<li><a href="#">Company History</a></li>
-							<li><a href="#">Peace of Mind</a></li>
-						</ul>
-					</div>
-					<!-- end about block -->
+					{% block side-menu %}
+
+          {% endblock %}
 					<!-- begin contact block -->
 					<div class="contact-block">
 						<h4>Contact Us</h4>
 						<div class="text">
 							<p>Telepone: +44 (0) 1270 760 160</p>
-							<p>Email: <a href="mailto:&#105;&#110;&#102;&#111;&#064;&#101;&#108;&#116;&#111;&#110;&#109;&#111;&#115;&#115;&#098;&#111;&#097;&#116;&#115;&#046;&#099;&#111;&#109;">info@eltonmossboats.com</a></p>
+							<p>Email: <a href="mailto:&#105;&#110;&#102;&#111;&#064;&#101;&#108;&#116;&#111;&#110;&#109;&#111;&#115;&#115;&#098;&#111;&#097;&#116;&#115;&#046;&#099;&#111;&#109;">&#105;&#110;&#102;&#111;&#064;&#101;&#108;&#116;&#111;&#110;&#109;&#111;&#115;&#115;&#098;&#111;&#097;&#116;&#115;&#046;&#099;&#111;&#109;</a></p>
 						</div>
 					</div>
 					<!-- end contact block -->
