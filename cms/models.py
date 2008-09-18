@@ -23,9 +23,10 @@ class Section(models.Model):
     name = models.CharField(max_length=50, unique=True)
     live = models.BooleanField(default=False)
     slug = models.SlugField(prepopulate_from=('name',), help_text='Auto generated')
-    icon_img = models.ImageField(upload_to='icons', help_text='115 x 72 rollover images')
-    block_img = models.ImageField(upload_to='block-images', help_text='765 x 253 image')
-    sort = models.SmallIntegerField(help_text='Lower number sort earlier.')
+    block_img = models.ImageField(upload_to='block-images', help_text='800 x 279 image')
+    thumbnail_img = models.ImageField(upload_to='icons', help_text='85 x 85 circular images')
+    sort = models.SmallIntegerField(help_text='Lower numbers sort earlier.')
+    parent = models.ForeignKey('self', blank=True, null=True, related_name='subsections')
     
     # Managers
     objects = models.Manager() # If this isn't first then non-live sections can't edited in the admin interface
@@ -144,6 +145,7 @@ class ArticleImage(Image):
 
 class SectionImage(Image):
     section = models.ForeignKey(Section, edit_inline=models.STACKED, related_name='images')
+    thumbnail_img = models.ImageField(upload_to='icons', help_text='85 x 85 circular images')
     class Admin:
         pass
     # I've comented this out after creation of the tables because it breaks the inline-editing in Sections.

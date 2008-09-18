@@ -4,6 +4,27 @@
 
 {% block title %}{{ block.super }} | {{ article.section.name }}{% endblock %}
 
+{% block top-menu %}
+  <ul id="menu">
+    {% for section in sections %}
+      <li>
+        <a href='{% url cms.views.section section.slug %}'>
+          <span>{{ section.name|title }}</span>
+        </a>
+        {% if section.subsections.all %}
+          <div>
+    				<ul>
+    				  {% for sub in section.subsections.all %}
+    				    <li><a href='{% url cms.views.section section.slug %}'>{{ sub.name|title }}</a></li>
+    				  {% endfor %}
+    				</ul>
+    			</div>
+        {% endif %}
+      </li>
+    {% endfor %}
+	</ul>
+{% endblock %}
+
 {% block body-text %}
   <div id="text-area">
     {{ article|add_images|safe }}

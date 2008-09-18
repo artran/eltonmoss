@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>EltonMoss</title>
+	<title>{% block title %}EltonMoss{% endblock %}</title>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<style media="all" type="text/css">@import "/media/css/all.css";</style>
 	<script type="text/javascript" src="/media/js/jquery-1.2.6.pack.js"></script>
@@ -85,22 +85,9 @@
 		<!-- BEGIN HEADER BLOCK -->
 		<div id="header">
 			<!-- begin menu block -->
-			<ul id="menu">
-				<li><a href="#"><span>Welcome</span></a></li>
-				<li>
-					<a href="#"><span>About Us</span></a>
-					<div>
-						<ul>
-							<li><a href="#">Company History</a></li>
-							<li><a href="#">Peace of Mind</a></li>
-						</ul>
-					</div>
-				</li>
-				<li><a href="#"><span>Our Boats</span></a></li>
-				<li><a href="#"><span>Locations</span></a></li>
-				<li><a href="#"><span>Special Offers</span></a></li>
-				<li><a href="#"><span>Contact Us</span></a></li>
-			</ul>
+			{% block top-menu %}
+			  
+			{% endblock %}
 			<!-- end menu block -->
 			<!-- begin language block -->
 			<ul class="language">

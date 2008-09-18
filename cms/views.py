@@ -17,7 +17,6 @@ def section(request, slug):
         the_article = articles[0]
     else:
         the_article = live_articles.order_by('?')[0]
-    print the_article
     return article(request, the_article.slug)
 
 def article(request, slug):
@@ -25,7 +24,7 @@ def article(request, slug):
     if not article.is_live():
         raise Http404
     
-    sections = Section.live_objects.all()
+    sections = Section.live_objects.filter(parent__isnull=True)
     live_articles = Article.live_objects.all()
     features = live_articles.filter(feature=True)
     
