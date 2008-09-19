@@ -27,6 +27,11 @@ function initGallery()
 			}
 			return false;
 		});
+		
+		// Now make the gallery width match the number of images
+		var width = _btn.length * 111;
+		$('#gallery .nav-hold').css('width', width);
+		$('#gallery .nav-hold ul').css('width', width);
 	}
 }
 if (window.addEventListener)
