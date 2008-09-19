@@ -132,6 +132,7 @@ class Image(models.Model):
         return self.name
     class Meta:
         abstract = True
+        ordering = ['id']
 
 class ArticleImage(Image):
     article = models.ForeignKey(Article, edit_inline=models.STACKED, related_name='images')
