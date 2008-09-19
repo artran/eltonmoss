@@ -30,6 +30,9 @@
     <div class="side-menu">
       <h4>{{ section.name|title }}</h4>
       <ul>
+        {% if section.parent %}
+          <li class='subsection-link'><a href='{% url cms.views.section section.parent.slug %}'>&laquo; {{ section.parent.name|title }}</a></li>
+        {% endif %}
         {% for sub in section.subsections.all %}
           <li class='subsection-link'><a href='{% url cms.views.section sub.slug %}'>&bull; {{ sub.name|title }}</a></li>
         {% endfor %}
