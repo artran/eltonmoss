@@ -7,7 +7,7 @@
 {% block top-menu %}
   <ul id="menu">
     {% for section in sections %}
-      <li>
+      <li {% ifequal section active_section %} class='active' {% endifequal %}>
         <a href='{% url cms.views.section section.slug %}'>
           <span>{{ section.name|title }}</span>
         </a>
