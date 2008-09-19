@@ -53,7 +53,7 @@ class Section(models.Model):
 class Article(models.Model):
     ARTICLE_LIVE_TEST = "(live_from is null or live_from < %s) and (live_to is null or live_to > %s)"
     title = models.CharField(max_length=100)
-    body = models.TextField(help_text='Use html for the content of the story. For local images use {{ IMAGE[&lt;SLUG&gt;] }} for the url.')
+    body = models.TextField(help_text='For local images use {{ IMAGE[&lt;SLUG&gt;] }} or /media/cms_images/&lt;IMG-FILE&gt; for the url.')
     style = models.TextField('Extra styling', blank=True)
     live_from = models.DateTimeField(blank=True, null=True, default=None, help_text='Blank means live immediately')
     live_to = models.DateTimeField(blank=True, null=True, default=None, help_text='Blank means live until forever')
