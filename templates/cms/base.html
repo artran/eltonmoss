@@ -1,3 +1,5 @@
+{% load i18n %}
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -34,10 +36,10 @@
           {% endblock %}
 					<!-- begin contact block -->
 					<div class="contact-block">
-						<h4>Contact Us</h4>
+						<h4>{% trans "Contact Us" %}</h4>
 						<div class="text">
-							<p>Telepone: +44 (0) 1270 760 160</p>
-							<p>Email: <a href="mailto:&#105;&#110;&#102;&#111;&#064;&#101;&#108;&#116;&#111;&#110;&#109;&#111;&#115;&#115;&#098;&#111;&#097;&#116;&#115;&#046;&#099;&#111;&#109;">&#105;&#110;&#102;&#111;&#064;&#101;&#108;&#116;&#111;&#110;&#109;&#111;&#115;&#115;&#098;&#111;&#097;&#116;&#115;&#046;&#099;&#111;&#109;</a></p>
+							<p>{% trans "Telephone" %}: +44 (0) 1270 760 160</p>
+							<p>{% trans "Email" %}: <a href="mailto:&#105;&#110;&#102;&#111;&#064;&#101;&#108;&#116;&#111;&#110;&#109;&#111;&#115;&#115;&#098;&#111;&#097;&#116;&#115;&#046;&#099;&#111;&#109;">&#105;&#110;&#102;&#111;&#064;&#101;&#108;&#116;&#111;&#110;&#109;&#111;&#115;&#115;&#098;&#111;&#097;&#116;&#115;&#046;&#099;&#111;&#109;</a></p>
 						</div>
 					</div>
 					<!-- end contact block -->
@@ -47,10 +49,10 @@
 		<!-- END CONTENT BLOCK -->
 		<!-- BEGIN FOOTER BLOCK -->
 		<div id="footer">
-			<p>Elton Moss Boatbuilders is a trading name of Carefree Cruising Ltd, Moss Bridge Cottage, Elton Moss Canal Bridge, Sandbach, Cheshire. CW11 3PW, UK</p>
+			<p>{% trans "footer first line" %}</p>
 			<ul>
-				<li>Copyright <a href="#">Carefree Cruising Ltd</a>. 2008</li>
-				<li>Registered in England &amp; Wales, No. 4438204</li>
+				<li>{% trans "Copyright" %} <a href="#">Carefree Cruising Ltd</a>. 2008</li>
+				<li>{% trans "Registered in" %} England &amp; Wales, No. 4438204</li>
 				<li><a href="#">Office of Fair Trading Consumer Credit Licence No. 532803</a></li>
 			</ul>
 		</div>
