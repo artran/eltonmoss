@@ -19,6 +19,14 @@ class LiveArticleManager(models.Manager):
         now = datetime.now()
         return super(LiveArticleManager, self).get_query_set().extra(where=[Article.ARTICLE_LIVE_TEST], params=[now, now]).filter(section__live=True)
 
+class Language(models.Model):
+    name = models.CharField(max_length=100)
+    code = models.CharField(max_length=2, help_text='Use the ISO 3166-1 2-letter code (see wikipedia)')
+    class Admin:
+        pass
+    def __unicode__(self):
+        return u'%s (%s)' % (self.name, self.code)
+
 class Section(models.Model):
     name = models.CharField(max_length=50, unique=True)
     live = models.BooleanField(default=False)
@@ -49,6 +57,19 @@ class Section(models.Model):
         ordering = ['sort']
     class Admin:
         pass
+
+class TransSection(models.Model):
+    """The translation of a section's name"""
+    lang = models.ForeignKey(Language)
+    section = models.ForeignKey(Section)
+    trans_name = models.CharField(max_length=50, unique=True)
+    class Admin:
+        list_display = ('trans_name', 'section', 'lang')
+        list_filter = ['lang']
+
+    def __unicode__(self):
+        return u'%s (%s, %s)' % (self.trans_name, self.section.name, self.lang.name)
+
 
 class Article(models.Model):
     ARTICLE_LIVE_TEST = "(live_from is null or live_from < %s) and (live_to is null or live_to > %s)"
