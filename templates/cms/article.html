@@ -9,13 +9,13 @@
     {% for section in sections %}
       <li {% ifequal section active_section %} class='active' {% endifequal %}>
         <a href='{% url cms.views.section section.slug %}'>
-          <span>{{ section.name|title }}</span>
+          <span>{{ section|i18n_section_name:lang|title }}</span>
         </a>
         {% if section.subsections.all %}
           <div>
     				<ul>
     				  {% for sub in section.subsections.all %}
-    				    <li><a href='{% url cms.views.section sub.slug %}'>{{ sub.name|title }}</a></li>
+    				    <li><a href='{% url cms.views.section sub.slug %}'>{{ sub|i18n_section_name:lang|title }}</a></li>
     				  {% endfor %}
     				</ul>
     			</div>
@@ -28,13 +28,13 @@
 {% block side-menu %}
   {% with article.section as section %}
     <div class="side-menu">
-      <h4>{{ section.name|title }}</h4>
+      <h4>{{ section|i18n_section_name:lang|title }}</h4>
       <ul>
         {% if section.parent %}
-          <li class='subsection-link'><a href='{% url cms.views.section section.parent.slug %}'>&laquo; {{ section.parent.name|title }}</a></li>
+          <li class='subsection-link'><a href='{% url cms.views.section section.parent.slug %}'>&laquo; {{ section.parent|i18n_section_name:lang|title }}</a></li>
         {% endif %}
         {% for sub in section.subsections.all %}
-          <li class='subsection-link'><a href='{% url cms.views.section sub.slug %}'>&bull; {{ sub.name|title }}</a></li>
+          <li class='subsection-link'><a href='{% url cms.views.section sub.slug %}'>&bull; {{ sub|i18n_section_name:lang|title }}</a></li>
         {% endfor %}
         {% for art in section.articles.all %}
           <li>
@@ -43,7 +43,7 @@
             {% else %}
               <a href='{% url cms.views.article art.slug %}'>
             {% endifequal %}
-            {{ art.title|title }}
+            {{ art|i18n_article_title:lang|title }}
             {% ifequal art article %}
               </span>
             {% else %}
@@ -79,6 +79,6 @@
 
 {% block body-text %}
   <div class="text-block">
-    {{ article|add_images|safe }}
+    {{ article|add_images:lang|safe }}
   </div>
 {% endblock %}

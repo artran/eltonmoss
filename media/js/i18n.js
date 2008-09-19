@@ -3,6 +3,7 @@ $(document).ready(highlightActiveLang);
 function setLang(languageCode) {
     createCookie('django_language', languageCode, 3650);
     highlightActiveLang();
+    window.location.reload();
     return false;
 }
 

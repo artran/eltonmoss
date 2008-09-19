@@ -2,7 +2,7 @@ from django import template
 
 import re
 
-from cms.models import Image
+from cms.models import *
 
 image_match_regex = re.compile(r'{{\s*IMAGE\[[\w-]*\]\s*}}')
 slug_match_regex = re.compile(r'\[([\w-]*)\]')
@@ -10,12 +10,12 @@ slug_match_regex = re.compile(r'\[([\w-]*)\]')
 register = template.Library()
 
 @register.filter
-def add_images(article):
+def add_images(article, lang):
     '''
-    Goes through the article body text resolving {{ IMAGE[<SLUG>] }} into the correct url for the image
+    Gets the translated body text and goes through it resolving {{ IMAGE[<SLUG>] }} into the correct url for the image
     with slug=<SLUG>
     '''
-    body = article.body
+    body = article.get_i18n_body(lang)
     matches = image_match_regex.finditer(body)
     if matches:
         images = article.images.all()
@@ -36,3 +36,11 @@ def add_images(article):
             body = body[:match.start()] + image_url + body[match.end():]
     return body
 add_images.is_safe = True
+
+@register.filter
+def i18n_section_name(section, lang):
+    return section.get_i18n_name(lang)
+
+@register.filter
+def i18n_article_title(article, lang):
+    return article.get_i18n_title(lang)

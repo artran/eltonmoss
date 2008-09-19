@@ -33,4 +33,4 @@ def article(request, slug):
     while active.parent:
         active = active.parent
     return render_to_response('cms/article.html', {'sections': sections, 'article': article, 'active_section': active,
-                        'related': related, 'in_this_section': live_articles, 'session': request.session})
+                        'related': related, 'in_this_section': live_articles, 'session': request.session, 'lang': request.LANGUAGE_CODE})

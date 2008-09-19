@@ -47,12 +47,21 @@ class Section(models.Model):
         else:
             image = self.images.order_by('?')[0]
             return image.get_image_url()
-            
-    def __str__(self):
+    
+    def get_i18n_name(self, language_code):
+        name = self.name
+        try:
+            trans_sect = TransSection.objects.get(lang__code=language_code, section=self)
+            name = trans_sect.trans_name
+        except TransSection.DoesNotExist:
+            pass
+        return name
+        
+    def __unicode__(self):
         if self.live:
             return self.name
         else:
-            return '%s (not live)' % self.name
+            return u'%s (not live)' % self.name
     class Meta:
         ordering = ['sort']
     class Admin:
@@ -66,7 +75,8 @@ class TransSection(models.Model):
     class Admin:
         list_display = ('trans_name', 'section', 'lang')
         list_filter = ['lang']
-
+    class Meta:
+        unique_together = ('lang', 'section')
     def __unicode__(self):
         return u'%s (%s, %s)' % (self.trans_name, self.section.name, self.lang.name)
 
@@ -91,6 +101,23 @@ class Article(models.Model):
     objects = models.Manager() # If this isn't first then non-live articles can't edited in the admin interface
     live_objects = LiveArticleManager()
     
+    def get_i18n_title(self, language_code):
+        title = self.title
+        try:
+            trans_article = TransArticle.objects.get(lang__code=language_code, article=self)
+            title = trans_article.title
+        except TransArticle.DoesNotExist:
+            pass
+        return title
+    def get_i18n_body(self, language_code):
+        body = self.body
+        try:
+            trans_article = TransArticle.objects.get(lang__code=language_code, article=self)
+            body = trans_article.body
+        except TransArticle.DoesNotExist:
+            pass
+        return body
+    
     def get_live_related(self):
         'Return all of the related Articles which are live'
         now = datetime.now()
@@ -113,17 +140,31 @@ class Article(models.Model):
         self.last_edited_at = datetime.now()
         super(Article, self).save()
         
-    def __str__(self):
+    def __unicode__(self):
         if self.is_live():
             return self.title
         else:
-            return '%s (not live)' % self.title
+            return u'%s (not live)' % self.title
     class Admin:
         save_on_top = True
         list_filter = ('section', 'created_by')
         search_fields = ('title',)
         list_display = ('title', 'live_from', 'live_to', 'is_live')
-    
+
+class TransArticle(models.Model):
+    """The translation of an article's title and body text"""
+    lang = models.ForeignKey(Language)
+    article = models.ForeignKey(Article)
+    title = models.CharField(max_length=100)
+    body = models.TextField(help_text='For local images use {{ IMAGE[&lt;SLUG&gt;] }} or /media/cms_images/&lt;IMG-FILE&gt; for the url.')
+    class Admin:
+        list_display = ('title', 'article', 'lang')
+        list_filter = ['lang']
+    class Meta:
+        unique_together = ('lang', 'article')
+    def __unicode__(self):
+        return u'%s (%s, %s)' % (self.title, self.article.title, self.lang.name)
+
 class Image(models.Model):
     name = models.CharField(max_length=30, core=True)
     slug = models.SlugField(prepopulate_from=('name',), blank=True, help_text='Auto generated but can be overridden')
