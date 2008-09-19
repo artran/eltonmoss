@@ -21,7 +21,7 @@ class LiveArticleManager(models.Manager):
 
 class Language(models.Model):
     name = models.CharField(max_length=100)
-    code = models.CharField(max_length=2, help_text='Use the ISO 3166-1 2-letter code (see wikipedia)')
+    code = models.CharField(max_length=2, help_text='Use the ISO 639-1 2-letter language code (see wikipedia)')
     class Admin:
         pass
     def __unicode__(self):
