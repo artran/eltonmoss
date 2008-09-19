@@ -8,6 +8,8 @@
 	<script type="text/javascript" src="/media/js/ie-png-fix.js"></script>
 	<script type="text/javascript" src="/media/js/menu.js"></script>
 	<script type="text/javascript" src="/media/js/gallery.js"></script>
+	<script type="text/javascript" src="/media/js/cookie.js" charset="utf-8"></script>
+	<script type="text/javascript" src="/media/js/i18n.js" charset="utf-8"></script>
 	<!--[if lt IE 7]><style media="all" type="text/css">@import "/media/css/ie6.css";</style><![endif]-->
 </head>
 <body>
@@ -62,11 +64,11 @@
 			<!-- end menu block -->
 			<!-- begin language block -->
 			<ul class="language">
-				<li class="active"><a href="#" class="lang-english">english</a></li>
-				<li><a href="#" class="lang-french">french</a></li>
-				<li><a href="#" class="lang-dutch">dutch</a></li>
-				<li><a href="#" class="lang-german">german</a></li>
-				<li><a href="#" class="lang-czech">czech</a></li>
+				<li class="active"><a href="#" onclick="setLang('en')" class="lang-en">english</a></li>
+				<li><a href="#" onclick="setLang('fr')" class="lang-fr">french</a></li>
+				<li><a href="#" onclick="setLang('nl')" class="lang-nl">dutch</a></li>
+				<li><a href="#" onclick="setLang('de')" class="lang-de">german</a></li>
+				<li><a href="#" onclick="setLang('cz')" class="lang-cz">czech</a></li>
 			</ul>
 			<!-- end language block -->
 		</div>

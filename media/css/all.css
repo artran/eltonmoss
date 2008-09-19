@@ -145,11 +145,11 @@ a img{ border:none;}
 }
 #header .language a:hover,
 #header .language .active a{ background-position:0 -23px !important;}
-#header .language .lang-english{ background:url(../images/lang-english.gif) no-repeat;}
-#header .language .lang-french{ background:url(../images/lang-french.gif) no-repeat;}
-#header .language .lang-dutch{ background:url(../images/lang-dutch.gif) no-repeat;}
-#header .language .lang-german{ background:url(../images/lang-german.gif) no-repeat;}
-#header .language .lang-czech{ background:url(../images/lang-czech.gif) no-repeat;}
+#header .language .lang-en{ background:url(../images/lang-english.gif) no-repeat;}
+#header .language .lang-fr{ background:url(../images/lang-french.gif) no-repeat;}
+#header .language .lang-nl{ background:url(../images/lang-dutch.gif) no-repeat;}
+#header .language .lang-de{ background:url(../images/lang-german.gif) no-repeat;}
+#header .language .lang-cz{ background:url(../images/lang-czech.gif) no-repeat;}
 /*---- FOOTER CSS ----*/
 #footer{
 	width:800px;

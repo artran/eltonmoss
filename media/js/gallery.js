@@ -8,7 +8,7 @@ function initGallery()
 	{
 		_img = $('.hold img', hold);
 		_btn = $('.nav-hold li', hold);
-		for( var i = _btn.length-1 ; i >= 0 ; i--) if( _btn.eq(i).hasClass('active')) _n = i;
+		for( var i = 0 ; i < _btn.length ; i++) if( _btn.eq(i).hasClass('active')) _n = i;
 		_img.css({ display : 'none', zIndex : '1'});
 		if(_img.eq(_n).get(0)) _img.eq(_n).css({ display : 'block', zIndex : '2'});
 		_btn.click( function(){
