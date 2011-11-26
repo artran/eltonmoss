@@ -19,6 +19,7 @@ admin.site.register(Language, LanguageAdmin)
 
 
 class SectionAdmin(admin.ModelAdmin):
+    save_on_top = True
     inlines = (SectionImageInline,)
     prepopulated_fields = {'slug': ('name',)}
 admin.site.register(Section, SectionAdmin)
