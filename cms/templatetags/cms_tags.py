@@ -2,7 +2,7 @@ from django import template
 
 import re
 
-from cms.models import *
+from eltonmoss.cms.models import *
 
 image_match_regex = re.compile(r'{{\s*IMAGE\[[\w-]*\]\s*}}')
 slug_match_regex = re.compile(r'\[([\w-]*)\]')
