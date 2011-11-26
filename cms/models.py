@@ -29,14 +29,10 @@ class Language(models.Model):
     def __unicode__(self):
         return u'%s (%s)' % (self.name, self.code)
 
-    class Admin:
-        pass
-
 
 class Section(models.Model):
     name = models.CharField(max_length=50, unique=True)
     live = models.BooleanField(default=False)
-    # slug = models.SlugField(prepopulate_from=('name',), help_text='Auto generated')
     slug = models.SlugField(help_text='Auto generated')
     block_img = models.ImageField(upload_to='block-images', help_text='800 x 279 image')
     thumbnail_img = models.ImageField(upload_to='icons', help_text='85 x 85 circular images')
@@ -73,9 +69,6 @@ class Section(models.Model):
     class Meta:
         ordering = ['sort']
 
-    class Admin:
-        pass
-
 
 class TransSection(models.Model):
     """The translation of a section's name"""
@@ -85,10 +78,6 @@ class TransSection(models.Model):
 
     def __unicode__(self):
         return u'%s (%s, %s)' % (self.trans_name, self.section.name, self.lang.name)
-
-    class Admin:
-        list_display = ('trans_name', 'section', 'lang')
-        list_filter = ['lang']
 
     class Meta:
         unique_together = ('lang', 'section')
@@ -106,9 +95,7 @@ class Article(models.Model):
     created_by = models.ForeignKey(User, editable=False)
     last_edited_at = models.DateTimeField(blank=True, editable=False)
     last_edited_by = models.ForeignKey(User, related_name='edited_articles', editable=False)
-    # related = models.ManyToManyField('self', filter_interface=models.HORIZONTAL, blank=True)
     related = models.ManyToManyField('self', blank=True)
-    # slug = models.SlugField(prepopulate_from=('title',), unique=True, help_text='Auto generated')
     slug = models.SlugField(unique=True, help_text='Auto generated')
     section = models.ForeignKey(Section, related_name='articles')
 
@@ -162,12 +149,6 @@ class Article(models.Model):
         else:
             return u'%s (not live)' % self.title
 
-    class Admin:
-        save_on_top = True
-        list_filter = ('section', 'created_by')
-        search_fields = ('title',)
-        list_display = ('title', 'live_from', 'live_to', 'is_live')
-
 
 class TransArticle(models.Model):
     """The translation of an article's title and body text"""
@@ -179,17 +160,12 @@ class TransArticle(models.Model):
     def __unicode__(self):
         return u'%s (%s, %s)' % (self.title, self.article.title, self.lang.name)
 
-    class Admin:
-        list_display = ('title', 'article', 'lang')
-        list_filter = ['lang']
-
     class Meta:
         unique_together = ('lang', 'article')
 
 
 class Image(models.Model):
     name = models.CharField(max_length=30)
-    # slug = models.SlugField(prepopulate_from=('name',), blank=True, help_text='Auto generated but can be overridden')
     slug = models.SlugField(blank=True, help_text='Auto generated but can be overridden')
     caption = models.CharField(max_length=50, blank=True)
     height = models.IntegerField(null=True, blank=True)
@@ -223,25 +199,15 @@ class Image(models.Model):
 
 
 class ArticleImage(Image):
-    # article = models.ForeignKey(Article, edit_inline=models.STACKED, related_name='images')
     article = models.ForeignKey(Article, related_name='images')
 
-    class Admin:
-        pass
-    # I've comented this out after creation of the tables because it breaks the inline-editing in Articles.
-    # As the uniqueness test is done in the db this shouldn't be an issue.
-    #class Meta:
-    #    unique_together = (('slug', 'article'),)
+    class Meta:
+        unique_together = (('slug', 'article'),)
 
 
 class SectionImage(Image):
-    # section = models.ForeignKey(Section, edit_inline=models.STACKED, related_name='images')
     section = models.ForeignKey(Section, related_name='images')
     thumbnail_img = models.ImageField(upload_to='icons', help_text='85 x 85 circular images')
 
-    class Admin:
-        pass
-    # I've comented this out after creation of the tables because it breaks the inline-editing in Sections.
-    # As the uniqueness test is done in the db this shouldn't be an issue.
-    #class Meta:
-    #    unique_together = (('slug', 'section'),)
+    class Meta:
+        unique_together = (('slug', 'section'),)
