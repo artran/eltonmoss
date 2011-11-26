@@ -1,0 +1,42 @@
+[
+    {
+        "pk": 1, 
+        "model": "cms.language", 
+        "fields": {
+            "code": "en", 
+            "name": "English"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "cms.language", 
+        "fields": {
+            "code": "fr", 
+            "name": "French"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "cms.language", 
+        "fields": {
+            "code": "de", 
+            "name": "German"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "cms.language", 
+        "fields": {
+            "code": "nl", 
+            "name": "Dutch"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "cms.language", 
+        "fields": {
+            "code": "cs", 
+            "name": "Czech"
+        }
+    } 
+]
