@@ -4,7 +4,7 @@ from django.template.defaultfilters import slugify
 
 from datetime import datetime
 
-from cms.middleware import threadlocals
+from eltonmoss.cms.middleware import threadlocals
 
 import random
 
@@ -30,7 +30,8 @@ class Language(models.Model):
 class Section(models.Model):
     name = models.CharField(max_length=50, unique=True)
     live = models.BooleanField(default=False)
-    slug = models.SlugField(prepopulate_from=('name',), help_text='Auto generated')
+    # slug = models.SlugField(prepopulate_from=('name',), help_text='Auto generated')
+    slug = models.SlugField(help_text='Auto generated')
     block_img = models.ImageField(upload_to='block-images', help_text='800 x 279 image')
     thumbnail_img = models.ImageField(upload_to='icons', help_text='85 x 85 circular images')
     sort = models.SmallIntegerField(help_text='Lower numbers sort earlier.')
@@ -93,8 +94,10 @@ class Article(models.Model):
     created_by = models.ForeignKey(User, editable=False)
     last_edited_at = models.DateTimeField(blank=True, editable=False)
     last_edited_by = models.ForeignKey(User, related_name='edited_articles', editable=False)
-    related = models.ManyToManyField('self', filter_interface=models.HORIZONTAL, blank=True)
-    slug = models.SlugField(prepopulate_from=('title',), unique=True, help_text='Auto generated')
+    # related = models.ManyToManyField('self', filter_interface=models.HORIZONTAL, blank=True)
+    related = models.ManyToManyField('self', blank=True)
+    # slug = models.SlugField(prepopulate_from=('title',), unique=True, help_text='Auto generated')
+    slug = models.SlugField(unique=True, help_text='Auto generated')
     section = models.ForeignKey(Section, related_name='articles')
     
     # Managers
@@ -166,12 +169,13 @@ class TransArticle(models.Model):
         return u'%s (%s, %s)' % (self.title, self.article.title, self.lang.name)
 
 class Image(models.Model):
-    name = models.CharField(max_length=30, core=True)
-    slug = models.SlugField(prepopulate_from=('name',), blank=True, help_text='Auto generated but can be overridden')
+    name = models.CharField(max_length=30)
+    # slug = models.SlugField(prepopulate_from=('name',), blank=True, help_text='Auto generated but can be overridden')
+    slug = models.SlugField(blank=True, help_text='Auto generated but can be overridden')
     caption = models.CharField(max_length=50, blank=True)
     height = models.IntegerField(null=True, blank=True)
     width = models.IntegerField(null=True, blank=True)
-    image = models.ImageField(upload_to='cms_images', width_field='width', height_field='height', core=True)
+    image = models.ImageField(upload_to='cms_images', width_field='width', height_field='height')
     created_at = models.DateTimeField(blank=True, editable=False)
     created_by = models.ForeignKey(User, editable=False)
     
@@ -197,7 +201,8 @@ class Image(models.Model):
         ordering = ['id']
 
 class ArticleImage(Image):
-    article = models.ForeignKey(Article, edit_inline=models.STACKED, related_name='images')
+    # article = models.ForeignKey(Article, edit_inline=models.STACKED, related_name='images')
+    article = models.ForeignKey(Article, related_name='images')
     class Admin:
         pass
     # I've comented this out after creation of the tables because it breaks the inline-editing in Articles.
@@ -206,7 +211,8 @@ class ArticleImage(Image):
     #    unique_together = (('slug', 'article'),)
 
 class SectionImage(Image):
-    section = models.ForeignKey(Section, edit_inline=models.STACKED, related_name='images')
+    # section = models.ForeignKey(Section, edit_inline=models.STACKED, related_name='images')
+    section = models.ForeignKey(Section, related_name='images')
     thumbnail_img = models.ImageField(upload_to='icons', help_text='85 x 85 circular images')
     class Admin:
         pass

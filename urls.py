@@ -1,15 +1,18 @@
 import sys
+
 from django.conf.urls.defaults import *
+from django.contrib import admin
+
+admin.autodiscover()
 
 urlpatterns = patterns('',
     # The main site
     (r'^$', 'django.views.generic.simple.redirect_to', {'url': '/articles/'}),
-    (r'^articles/', include('cms.urls')),
+    (r'^articles/', include('eltonmoss.cms.urls')),
 )
 
 urlpatterns += patterns('',
-    # Admin:
-    (r'^admin/', include('django.contrib.admin.urls')),
+    (r'^admin/', include(admin.site.urls)),
 )
 
 # Static content
